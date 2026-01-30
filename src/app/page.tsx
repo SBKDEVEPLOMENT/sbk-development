@@ -22,9 +22,11 @@ export default function Home() {
       <section ref={targetRef} className="relative h-screen flex items-center justify-center overflow-hidden">
         {/* Dynamic Background */}
         <div className="absolute inset-0 bg-[#0B1120]">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
           <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 mix-blend-overlay"></div>
           <div className="absolute top-[-50%] left-[-20%] w-[70%] h-[70%] rounded-full bg-blue-600/20 blur-[120px] animate-pulse-slow" />
           <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-purple-600/20 blur-[120px] animate-pulse-slow delay-1000" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0B1120]/50 to-[#0B1120]"></div>
         </div>
         
         <motion.div 
@@ -36,12 +38,16 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-blue-400 text-sm font-medium mb-6 backdrop-blur-sm">
-              🚀 Elevando Estándares Digitales
+            <span className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-8 backdrop-blur-sm shadow-lg shadow-blue-500/5">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+              </span>
+              Elevando Estándares Digitales
             </span>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-8 leading-tight">
               Construimos el <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 animate-gradient-x">
+              <span className="text-gradient animate-gradient-x">
                 Futuro Digital
               </span>
             </h1>
@@ -53,16 +59,16 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <Link 
                 href="/contact" 
-                className="group relative px-8 py-4 bg-white text-black font-bold rounded-full overflow-hidden transition-all hover:scale-105"
+                className="group relative px-8 py-4 bg-blue-600 text-white font-bold rounded-full overflow-hidden transition-all hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   Iniciar Proyecto <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-gray-100 to-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </Link>
               <Link 
                 href="/portfolio" 
-                className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white border border-white/10 font-medium rounded-full transition-all backdrop-blur-sm hover:border-white/20"
+                className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white border border-white/10 font-medium rounded-full transition-all backdrop-blur-sm hover:border-white/20 hover:shadow-lg hover:shadow-white/5"
               >
                 Explorar Portafolio
               </Link>
@@ -254,34 +260,44 @@ export default function Home() {
 function ServiceCard({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) {
   return (
     <motion.div 
-      whileHover={{ y: -10 }}
-      className="p-8 rounded-3xl bg-[#0F172A] border border-white/5 hover:border-blue-500/30 transition-all group hover:bg-[#1E293B]"
+      whileHover={{ y: -5 }}
+      className="glass-card p-8 rounded-3xl hover:border-blue-500/30 transition-all group hover:bg-white/10 relative overflow-hidden"
     >
-      <div className="mb-6 p-4 rounded-2xl bg-white/5 w-fit group-hover:bg-blue-500/20 transition-colors">
-        {icon}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div className="relative z-10">
+        <div className="mb-6 p-4 rounded-2xl bg-white/5 w-fit group-hover:bg-blue-500/20 transition-colors ring-1 ring-white/10">
+          {icon}
+        </div>
+        <h3 className="text-2xl font-bold mb-4 group-hover:text-blue-200 transition-colors">{title}</h3>
+        <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">
+          {description}
+        </p>
       </div>
-      <h3 className="text-2xl font-bold mb-4">{title}</h3>
-      <p className="text-gray-400 leading-relaxed">
-        {description}
-      </p>
     </motion.div>
   );
 }
 
 function ProjectPreview({ title, category, image, link }: { title: string, category: string, image: string, link: string }) {
   return (
-    <Link href={link} className="group relative block aspect-[16/9] rounded-3xl overflow-hidden">
-      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors z-10" />
+    <Link href={link} className="group relative block aspect-[16/9] rounded-3xl overflow-hidden border border-white/10 hover:border-blue-500/30 transition-colors">
+      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10" />
       <Image 
         src={image} 
         alt={title}
         fill
         className="object-cover group-hover:scale-105 transition-transform duration-700"
       />
-      <div className="absolute bottom-0 left-0 p-8 z-20 w-full bg-gradient-to-t from-black/90 to-transparent">
-        <span className="text-blue-400 text-sm font-bold uppercase tracking-wider mb-2 block">{category}</span>
-        <h3 className="text-3xl font-bold text-white flex items-center gap-4">
-          {title} <ArrowRight className="w-6 h-6 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-transparent to-transparent opacity-80" />
+      
+      <div className="absolute bottom-0 left-0 p-8 z-20 w-full">
+        <span className="inline-block px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-bold uppercase tracking-wider mb-3 backdrop-blur-md border border-blue-500/20">
+          {category}
+        </span>
+        <h3 className="text-3xl font-bold text-white flex items-center gap-4 group-hover:text-blue-200 transition-colors">
+          {title} 
+          <span className="bg-white/10 p-2 rounded-full backdrop-blur-sm opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+            <ArrowRight className="w-5 h-5" />
+          </span>
         </h3>
       </div>
     </Link>
@@ -290,13 +306,19 @@ function ProjectPreview({ title, category, image, link }: { title: string, categ
 
 function ProcessStep({ number, title, description }: { number: string, title: string, description: string }) {
   return (
-    <div className="flex gap-6 group">
-      <span className="text-5xl font-bold text-white/10 group-hover:text-blue-500/50 transition-colors font-serif">
-        {number}
-      </span>
-      <div>
-        <h3 className="text-2xl font-bold mb-2 group-hover:text-blue-400 transition-colors">{title}</h3>
-        <p className="text-gray-400 leading-relaxed">{description}</p>
+    <div className="flex gap-8 group relative">
+      <div className="flex flex-col items-center">
+        <span className="text-6xl font-bold text-white/5 group-hover:text-blue-500/20 transition-colors font-serif relative z-10">
+          {number}
+        </span>
+      </div>
+      <div className="pt-2">
+        <h3 className="text-2xl font-bold mb-3 group-hover:text-blue-400 transition-colors flex items-center gap-2">
+          {title}
+        </h3>
+        <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors max-w-md">
+          {description}
+        </p>
       </div>
     </div>
   );
