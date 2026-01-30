@@ -35,12 +35,13 @@ export function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-32 h-12 group-hover:scale-105 transition-transform duration-300">
+            <div className="relative w-48 h-16 group-hover:scale-105 transition-transform duration-300">
               <Image 
                 src="/logo.png" 
                 alt="SBK Development Logo" 
                 fill
                 className="object-contain object-left"
+                priority
               />
             </div>
           </Link>

@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   description: "Agencia de desarrollo web profesional. Creamos sitios web de alto impacto, e-commerce y aplicaciones web con las últimas tecnologías.",
   icons: {
     icon: "/logo.png",
+    apple: "/logo.png",
   },
 };
 
