@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { Menu, X, ChevronRight } from 'lucide-react';
+import { createClient } from '@/utils/supabase/client';
+import { Menu, X, ChevronRight, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
@@ -16,12 +17,27 @@ const navLinks = [
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
+    
+    // Check auth state safely
+    const checkAuth = async () => {
+      try {
+        const supabase = createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+        setUser(user);
+      } catch (e) {
+        // Supabase keys might not be configured yet
+        console.log('Auth not configured');
+      }
+    };
+    checkAuth();
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -103,12 +119,12 @@ export function Navbar() {
               ))}
               <div className="pt-4 border-t border-white/10">
                 <Link
-                  href="/login"
+                  href={user ? "/dashboard" : "/login"}
                   className="flex items-center justify-center gap-2 w-full bg-blue-600 text-white px-4 py-3 rounded-xl font-bold hover:bg-blue-500 transition-colors"
                   onClick={() => setIsOpen(false)}
                 >
-                  Acceder al Área de Clientes
-                  <ChevronRight className="w-4 h-4" />
+                  {user ? 'Ir a Mi Panel' : 'Acceder al Área de Clientes'}
+                  {user ? <User className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
                 </Link>
               </div>
             </div>

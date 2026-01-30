@@ -132,12 +132,22 @@ export default function Contact() {
 }
 
 function ContactItem({ icon, title, content, link, isLink }: { icon: React.ReactNode, title: string, content: string, link?: string, isLink?: boolean }) {
-  const Wrapper = isLink && link ? Link : 'div';
-  const props = isLink && link ? { href: link, className: "flex items-start gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors cursor-pointer" } : { className: "flex items-start gap-4 p-4" };
+  if (isLink && link) {
+    return (
+      <Link href={link} className="flex items-start gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors cursor-pointer">
+        <div className="bg-white/10 p-3 rounded-lg">
+          {icon}
+        </div>
+        <div>
+          <h3 className="font-semibold text-white">{title}</h3>
+          <p className="text-gray-400">{content}</p>
+        </div>
+      </Link>
+    )
+  }
 
   return (
-    // @ts-ignore
-    <Wrapper {...props}>
+    <div className="flex items-start gap-4 p-4">
       <div className="bg-white/10 p-3 rounded-lg">
         {icon}
       </div>
@@ -145,6 +155,6 @@ function ContactItem({ icon, title, content, link, isLink }: { icon: React.React
         <h3 className="font-semibold text-white">{title}</h3>
         <p className="text-gray-400">{content}</p>
       </div>
-    </Wrapper>
+    </div>
   );
 }
