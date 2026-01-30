@@ -12,7 +12,7 @@ const projects = [
     description: 'Plataforma de comercio electrónico de alto rendimiento con pasarela de pagos, gestión de inventario en tiempo real y panel de administración.',
     tags: ['Next.js', 'Supabase', 'Stripe', 'Tailwind'],
     image: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=800&q=80',
-    link: '#',
+    link: '/portfolio/ecommerce',
     github: '#'
   },
   {
@@ -21,7 +21,7 @@ const projects = [
     description: 'Sistema de gestión interna para empresa logística. Visualización de datos, reportes automáticos y gestión de usuarios.',
     tags: ['React', 'TypeScript', 'Recharts', 'PostgreSQL'],
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
-    link: '#',
+    link: '/portfolio/dashboard',
     github: '#'
   },
   {
@@ -30,7 +30,7 @@ const projects = [
     description: 'Portal inmobiliario con búsqueda avanzada, mapas interactivos y tours virtuales 3D.',
     tags: ['Next.js', 'Mapbox', 'Framer Motion'],
     image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80',
-    link: '#',
+    link: '/portfolio/real-estate',
     github: '#'
   },
   {
@@ -39,7 +39,7 @@ const projects = [
     description: 'Aplicación web para gestión de finanzas personales, integración bancaria y análisis de gastos con IA.',
     tags: ['Next.js', 'OpenAI', 'Tailwind', 'Supabase'],
     image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80',
-    link: '#',
+    link: '/portfolio/fintech',
     github: '#'
   }
 ];

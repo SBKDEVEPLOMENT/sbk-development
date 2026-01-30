@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { Mail, MessageSquare, Phone, MapPin, Send } from 'lucide-react';
 import { useState } from 'react';
 
