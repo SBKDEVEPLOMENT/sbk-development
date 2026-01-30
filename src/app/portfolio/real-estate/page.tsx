@@ -199,15 +199,25 @@ export default function RealEstateDemo() {
       </div>
 
       {/* Right Panel - Map Simulation */}
-      <div className="hidden lg:block flex-1 bg-gray-100 relative overflow-hidden">
-        <div className="absolute inset-0 grayscale contrast-[0.9] brightness-[1.1]">
-           {/* Abstract Map Background */}
-           <div className="w-full h-full bg-[#e5e7eb] relative">
-             <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(#9ca3af 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
-             {/* Simulated Streets/Blocks */}
-             <div className="absolute top-[20%] left-0 right-0 h-4 bg-white/50 rotate-3"></div>
-             <div className="absolute top-0 bottom-0 left-[40%] w-4 bg-white/50 -rotate-6"></div>
-           </div>
+      <div className="hidden lg:block flex-1 bg-[#f0f0f0] relative overflow-hidden group">
+        {/* Realistic Map Background */}
+        <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
+           <img 
+             src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=2000&q=80" 
+             alt="City Map" 
+             className="w-full h-full object-cover opacity-50 grayscale hover:grayscale-0 transition-all duration-500"
+           />
+           <div className="absolute inset-0 bg-blue-900/10 mix-blend-multiply pointer-events-none" />
+        </div>
+
+        {/* Interactive Map UI Elements */}
+        <div className="absolute top-6 left-6 flex gap-2 z-20">
+            <div className="bg-white/90 backdrop-blur px-4 py-2 rounded-lg shadow-sm text-xs font-bold uppercase tracking-wider">
+                Area: Beverly Hills
+            </div>
+            <div className="bg-white/90 backdrop-blur px-4 py-2 rounded-lg shadow-sm text-xs font-bold uppercase tracking-wider text-blue-600">
+                5 Listings
+            </div>
         </div>
 
         {/* Map Markers */}
