@@ -1,9 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
-import { Menu, X, Code2 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { Menu, X, Code2, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
   { name: 'Inicio', href: '/' },
@@ -14,45 +14,62 @@ const navLinks = [
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <nav className="glass-nav w-full transition-all duration-300">
+    <nav 
+      className={`fixed w-full z-50 transition-all duration-500 ${
+        scrolled ? 'bg-black/80 backdrop-blur-xl border-b border-white/10 py-4' : 'bg-transparent py-6'
+      }`}
+    >
       <div className="container-width">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 group">
-            <div className="bg-blue-600 p-1.5 rounded-lg group-hover:bg-blue-500 transition-colors">
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="relative flex items-center justify-center w-10 h-10 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-xl shadow-lg shadow-blue-900/20 group-hover:scale-105 transition-transform duration-300">
               <Code2 className="w-6 h-6 text-white" />
             </div>
-            <span className="font-bold text-xl tracking-tight">SBK Development</span>
+            <span className="font-bold text-xl tracking-tight text-white group-hover:text-blue-200 transition-colors">
+              SBK<span className="text-blue-500">.</span>Dev
+            </span>
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:block">
-            <div className="flex items-center space-x-8">
+          <div className="hidden md:flex items-center gap-8">
+            <div className="flex items-center gap-1 bg-white/5 rounded-full px-2 py-1 border border-white/5 backdrop-blur-sm">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
+                  className="relative px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors rounded-full hover:bg-white/10"
                 >
                   {link.name}
                 </Link>
               ))}
-              <Link
-                href="/login"
-                className="bg-white text-black px-4 py-2 rounded-full font-medium hover:bg-gray-200 transition-colors text-sm"
-              >
-                Área Clientes
-              </Link>
             </div>
+            
+            <Link
+              href="/login"
+              className="group flex items-center gap-2 bg-white text-black px-5 py-2.5 rounded-full font-bold text-sm hover:bg-gray-100 transition-all hover:scale-105"
+            >
+              Área Clientes
+              <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-300 hover:text-white p-2"
+              className="p-2 text-gray-300 hover:text-white bg-white/5 rounded-lg border border-white/10"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -61,33 +78,39 @@ export function Navbar() {
       </div>
 
       {/* Mobile Menu Dropdown */}
-      {isOpen && (
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="md:hidden bg-black border-b border-gray-800"
-        >
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.name}
-              </Link>
-            ))}
-            <Link
-              href="/login"
-              className="text-blue-400 block px-3 py-2 rounded-md text-base font-medium"
-              onClick={() => setIsOpen(false)}
-            >
-              Área Clientes
-            </Link>
-          </div>
-        </motion.div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-[#0B1120] border-b border-white/10 overflow-hidden"
+          >
+            <div className="container-width py-6 space-y-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="block px-4 py-3 text-lg font-medium text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.name}
+                </Link>
+              ))}
+              <div className="pt-4 border-t border-white/10">
+                <Link
+                  href="/login"
+                  className="flex items-center justify-center gap-2 w-full bg-blue-600 text-white px-4 py-3 rounded-xl font-bold hover:bg-blue-500 transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Acceder al Área de Clientes
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
