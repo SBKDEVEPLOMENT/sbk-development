@@ -11,8 +11,9 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'API Key not configured' }, { status: 500 });
     }
 
+    // Using gemini-2.0-flash as it is available for this key (1.5 is missing)
     const model = genAI.getGenerativeModel({ 
-      model: 'gemini-2.5-flash',
+      model: 'gemini-2.0-flash',
       systemInstruction: {
         role: 'system',
         parts: [{ text: `
