@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Github, Twitter, Linkedin, Mail, MessageCircle, Heart, ArrowRight } from 'lucide-react';
 
 export function Footer() {
@@ -7,9 +8,16 @@ export function Footer() {
       <div className="container-width">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold tracking-tight text-white">
-              SBK<span className="text-blue-500">.</span>Dev
-            </h2>
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="relative w-40 h-14">
+                <Image 
+                  src="/logo.png" 
+                  alt="SBK Development Logo" 
+                  fill
+                  className="object-contain object-left"
+                />
+              </div>
+            </Link>
             <p className="text-gray-400 leading-relaxed">
               Transformamos ideas complejas en experiencias digitales de alto impacto. 
               Calidad, velocidad y escalabilidad en cada línea de código.

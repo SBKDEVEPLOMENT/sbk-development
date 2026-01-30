@@ -1,8 +1,9 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { Menu, X, Code2, ChevronRight } from 'lucide-react';
+import { Menu, X, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
@@ -34,12 +35,14 @@ export function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative flex items-center justify-center w-10 h-10 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-xl shadow-lg shadow-blue-900/20 group-hover:scale-105 transition-transform duration-300">
-              <Code2 className="w-6 h-6 text-white" />
+            <div className="relative w-32 h-12 group-hover:scale-105 transition-transform duration-300">
+              <Image 
+                src="/logo.png" 
+                alt="SBK Development Logo" 
+                fill
+                className="object-contain object-left"
+              />
             </div>
-            <span className="font-bold text-xl tracking-tight text-white group-hover:text-blue-200 transition-colors">
-              SBK<span className="text-blue-500">.</span>Dev
-            </span>
           </Link>
 
           {/* Desktop Menu */}
