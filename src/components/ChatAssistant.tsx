@@ -48,11 +48,15 @@ export function ChatAssistant() {
 
       const data = await response.json();
       
-      if (data.text) {
+      if (data.error) {
+        console.error('Chat API Error:', data.error);
+        setMessages(prev => [...prev, { role: 'model', parts: [{ text: "⚠️ Lo siento, ocurrió un error en el sistema. Por favor intenta más tarde." }] }]);
+      } else if (data.text) {
         setMessages(prev => [...prev, { role: 'model', parts: [{ text: data.text }] }]);
       }
     } catch (error) {
       console.error('Error sending message:', error);
+      setMessages(prev => [...prev, { role: 'model', parts: [{ text: "⚠️ Error de conexión. Verifica tu internet." }] }]);
     } finally {
       setIsLoading(false);
     }
