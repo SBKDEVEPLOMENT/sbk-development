@@ -34,12 +34,12 @@ const projects = [
     github: '#'
   },
   {
-    title: 'Fintech App',
-    category: 'Fintech',
-    description: 'Aplicación web para gestión de finanzas personales, integración bancaria y análisis de gastos con IA.',
-    tags: ['Next.js', 'OpenAI', 'Tailwind', 'Supabase'],
-    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80',
-    link: '/portfolio/fintech',
+    title: 'Plataforma Médica SaaS',
+    category: 'Sistema SaaS',
+    description: 'Portal integral para clínicas con gestión de pacientes, citas médicas, historial clínico y telemedicina integrada.',
+    tags: ['Next.js', 'PostgreSQL', 'WebRTC', 'Tailwind'],
+    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80',
+    link: '/portfolio/medical',
     github: '#'
   }
 ];
